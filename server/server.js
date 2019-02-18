@@ -17,6 +17,23 @@ app.use(express.static(publicPath));
 io.on('connection', (socket) => {
   console.log('New User Connected');
 
+  //create an event, specify data -> dy default we dont have to emit any
+socket.emit('newMessage', {
+    from: "random user",
+    text: "Hello!",
+    createdAt: 123
+  });
+
+
+socket.on('createMessage', (message) => {
+  console.log('createMessage:', message);
+})
+
+// socket.emit('createMessage', {
+//   from: 'ijfhakfj',
+//   tex: 'asdasd'
+// });
+
   socket.on('disconnect', (socket) => {
     console.log('User disconnected');
   })
